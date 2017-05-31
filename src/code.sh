@@ -79,7 +79,6 @@ java="java -Xmx$(<.mem_in_mb.txt)m"
 mark-section "Run Varscan VariantAnnotator"
 for (( i=0; i<${#bam_file_path[@]}; i++ )); 
 do echo ${bam_file_prefix[i]}
-echo bam_file_prefix
 samtools mpileup -f $genome_file -B -d 500000 -q 1 ${bam_file_path[i]}| \
 $java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > ${bam_file_prefix[i]}.varscan.vcf
 sed -i 's/Sample1/'"${bam_file_prefix}"'/' ${bam_file_prefix[i]}.varscan.vcf
