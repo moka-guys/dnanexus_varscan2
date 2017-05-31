@@ -1,0 +1,148 @@
+{
+  "name": "varscan2",
+  "title": "Varscan2",
+  "summary": "v1.0 - (TBC.",
+  "tags": [
+    "Variants",
+    "Cancer"
+  ],
+  "properties": {
+    "github release": "v1.0"
+  },
+  "dxapi": "1.0.0",
+  "inputSpec": [
+    {
+      "name": "bam_file",
+      "label": "Bam file",
+      "help": "The aligned bam file",
+      "class": "array:file",
+      "patterns": ["*.bam"],
+      "optional": false
+    },
+    {
+      "name": "bed_file",
+      "label": "Bed file",
+      "help": "bed file used for variant filtering",
+      "class": "file",
+      "patterns": ["*.bed"],
+      "optional": true
+    },
+    {
+      "name": "ref_genome",
+      "label": "referance genome",
+      "help": "referance genome",
+      "class": "file",
+      "optional": false
+    },
+    {
+     "name": "min_coverage",
+     "label": "min-coverage",
+     "help": "Minimum read depth at a position to make a call",
+     "class": "string",
+     "optional": false,
+     "default": "10",      
+     "group": "Common"
+    },   
+    {
+     "name": "min_reads2",
+     "label": "min-reads2",
+     "help": "Minimum supporting reads at a position to call variants",
+     "class": "string",
+     "optional": false,
+     "default": "5",      
+     "group": "Common"
+    },   
+    {
+     "name": "min_avg_qual",
+     "label": "min-avg-qual",
+     "help": "Minimum base quality at a position to count a read",
+     "class": "string",
+     "optional": true,
+     "default": "15",      
+     "group": "Common"
+    },    
+    {
+     "name": "min_var_freq",
+     "label": "min-var-freq",
+     "help": "Minimum variant allele frequency threshold",
+     "class": "string",
+     "optional": true,
+     "default": "0.01",      
+     "group": "Common"
+    },    
+    {
+     "name": "min_freq_for_hom",
+     "label": "min-freq-for-hom",
+     "help": "Minimum frequency to call homozygote",
+     "class": "string",
+     "optional": true,
+     "default": "0.75",      
+     "group": "Common"
+    },    
+    {
+     "name": "p_value",
+     "label": "Default p-value",
+     "help": "Default p-value threshold for calling variants",
+     "class": "string",
+     "optional": true,
+     "default": "0.05",      
+     "group": "Common"
+    },
+    {
+     "name": "strand_filter",
+     "label": "Strand Filter",
+     "help": "Ignore variants with >90% support on one strand",
+     "class": "boolean",
+     "optional": false,
+     "default": false,      
+     "group": "Common"
+    },
+    {
+     "name": "output_vcf",
+     "label": "output-vcf",
+     "help": " outputs in VCF format if true",
+     "class": "boolean",
+     "optional": false,
+     "default": true,      
+     "group": "Common"
+    },
+    {
+     "name": "variants",
+     "label": "variants",
+     "help": " Report only variant (SNP/indel) positions (mpileup2cns only) [0]",
+     "class": "boolean",
+     "optional": false,
+     "default": true,      
+     "group": "Common"
+    }
+    ],
+  "outputSpec": [
+    {
+      "name": "varscan_vcf",
+      "label": "Output annotated VCF",
+      "help": "Output annotated VCF.",
+      "class": "array:file"
+    },
+    {
+      "name": "varscan_vcf_bed",
+      "label": "Output bedfiltered annotated VCF",
+      "help": "Output bedfiltered annotated VCF.",
+      "class": "array:file"
+    }
+
+  ],
+  "runSpec": {
+    "execDepends": [
+    {
+      "name": "openjdk-8-jre-headless"
+    }
+    ],
+    "systemRequirements": {
+      "main": {
+        "instanceType": "mem1_ssd1_x8"
+      }
+    },
+    "file": "src/code.sh",
+    "interpreter": "bash"
+  }
+}
