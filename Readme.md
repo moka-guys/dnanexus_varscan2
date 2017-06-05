@@ -2,22 +2,24 @@
 
 ## What does this app do?
 
-This app is a variant and somatic mutation/CNV caller. Generates a vcf.
+This app is a somatic mutation/CNV caller.
+This app can preform variant calling on multiple samples. 
 
-The app generates an mpileup from a bam file then uses Varscan2 to call variants. 
-
-This app uses Varscan2 mpileup2cns command to make consensus calls on SNP/Indel/Reference from a mpileup file. 
 
 ## What are typical use cases for this app?
 
-This app is typically used after sequencing alignment, to generate a vcf of variants identified. 
+Varscan2 is used to detect variation (CNV and SNV) in somatic cancer testing. 
+This is used to test samples being processed by the SWIFT amplicon panels (inputs and outputs are described below in the readme). 
+
+Varscan2 variant calling is performed after alignment and the output vcf will be uploaded into Ingenuity for annotation and filtering.
+
 
 ## What inputs are required for this app to run?
 
 This app requires the following data:
 
 - Compressed reference genome including `*.fa` and `*.fa.fai` (`*.tar.gz`)
-- BAM files (`*.bam`)
+- BAM file(s) (`*.bam`)
 - BED file of regions of intrest, for filtering output vcf (`*.bed`) (optional)
 
 This app requires the following inputs [default]:
@@ -34,16 +36,14 @@ This app requires the following inputs [default]:
 
 
 ## What does this app output?
-
-This app outputs a vcf (or.txt) per sample detaling all variants identified. For detailed information about the analysis, consult the Varscan manual at:
-
+This app will output a vcf file for each sample detailing CNV or SNV variants called. Output vcfs will be passed to Ingenuity for annotation and filtering.
+For detailed information about the analysis, consult the Varscan manual at:
 http://varscan.sourceforge.net/using-varscan.html
 
 
 ## How does this app work?
-
-This app runs Samtools to generate an mpileup of each bam file.
-Varscan2, then makes consensus calls (SNP/Indel/Reference) from a mpileup file based on user-defined parameters. By defult outputs in vcf format.
+This app uses Samtools to generate an mpileup from each input bam file. 
+Varscan2 mpileup2cns function is then used to call CNV and SNV variants from the mpileup file based on user-defined parameters, outputting a vcf for each sample input. 
 
 
 ## Custom modifications

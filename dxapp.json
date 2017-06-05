@@ -1,7 +1,7 @@
 {
   "name": "varscan2",
   "title": "Varscan2",
-  "summary": "v1.0 - (TBC.",
+  "summary": "v1.0 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
