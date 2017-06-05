@@ -2,16 +2,16 @@
 
 ## What does this app do?
 
-This app is a somatic mutation/CNV caller.
-This app can preform variant calling on multiple samples. 
+This app applies Varscan2, a variant caller well suited for somatic samples.
+
+Varscan2 variant calling is performed after alignment and the output vcf will be uploaded into Ingenuity for annotation and filtering.
+
+This app will perform variant calling on multiple samples. 
 
 
 ## What are typical use cases for this app?
 
-Varscan2 is used to detect variation (CNV and SNV) in somatic cancer testing. 
-This is used to test samples being processed by the SWIFT amplicon panels (inputs and outputs are described below in the readme). 
-
-Varscan2 variant calling is performed after alignment and the output vcf will be uploaded into Ingenuity for annotation and filtering.
+Varscan2 is used to detect variation (CNV and SNV) in somatic cancer samples being tested using the SWIFT amplicon panels. 
 
 
 ## What inputs are required for this app to run?
@@ -42,8 +42,11 @@ http://varscan.sourceforge.net/using-varscan.html
 
 
 ## How does this app work?
-This app uses Samtools to generate an mpileup from each input bam file. 
-Varscan2 mpileup2cns function is then used to call CNV and SNV variants from the mpileup file based on user-defined parameters, outputting a vcf for each sample input. 
+
+- The app loops through the list of input BAM files
+- Samtools converts each bamfile to a mpileup file 
+- Variant calling is performed using Varscan2 mpileup2cns function
+- If a BED file is supplied bedtools is used to filter the vcf (removing variants from off-target alignment)
 
 
 ## Custom modifications
