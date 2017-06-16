@@ -97,10 +97,10 @@ done
 # Send output back to DNAnexus project
 # Move output vcfs into seperate folders for bedfiltered vcfs and varscan vcf output. 
 mark-section "Upload output"
-mkdir -p ~/out/varscan_vcf/
-mkdir -p ~/out/varscan_vcf_bed/
-mv ./*.varscan.vcf ~/out/varscan_vcf/
-mv ./*.varscan.bedfiltered.vcf ~/out/varscan_vcf_bed/
+mkdir -p ~/out/varscan_vcf/vcf
+mkdir -p ~/out/varscan_vcf_bed/vcf
+mv ./*.varscan.vcf ~/out/varscan_vcf/vcf
+mv ./*.varscan.bedfiltered.vcf ~/out/varscan_vcf_bed/vcf
 
 dx-upload-all-outputs --parallel
 

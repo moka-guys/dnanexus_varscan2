@@ -1,4 +1,4 @@
-# DNAnexus Varscan2.4.3 v1.0
+# DNAnexus Varscan2.4.3 v1.1
 
 ## What does this app do?
 
