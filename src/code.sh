@@ -85,7 +85,7 @@ do echo ${bam_file_prefix[i]}
 samtools mpileup -f $genome_file -B -d 500000 -q 1 ${bam_file_path[i]}| \
 $java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > ${bam_file_prefix[i]}.varscan.vcf
 # Rename sample in vcf to corrospond to bam file name (aka sample name). Varscan defult is to name samples 'Sample1'
-sed -i 's/Sample1/'"${bam_file_prefix}"'/' ${bam_file_prefix[i]}.varscan.vcf
+sed -i 's/Sample1/'"${bam_file_prefix[i]}"'/' ${bam_file_prefix[i]}.varscan.vcf
 
 # filter vcf to disply variants located within genomic regions specified by the bed file input.
 if [ "$bed_file" != "" ]; then
