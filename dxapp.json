@@ -1,13 +1,13 @@
 {
   "name": "varscan2",
   "title": "Varscan2",
-  "summary": "v1.2 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
+  "summary": "v1.3 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
   ],
   "properties": {
-    "github release": "v1.2"
+    "github release": "v1.3"
   },
   "dxapi": "1.0.0",
   "inputSpec": [
@@ -142,6 +142,8 @@
         "instanceType": "mem1_ssd1_x8"
       }
     },
+    "distribution" : "Ubuntu",
+    "release" : "14.04",
     "file": "src/code.sh",
     "interpreter": "bash"
   }
