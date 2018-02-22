@@ -81,8 +81,12 @@ mark-section "Run Varscan VariantAnnotator"
 for (( i=0; i<${#bam_file_path[@]}; i++ )); 
 # show name of current bam file be run
 do echo ${bam_file_prefix[i]}
-#if there is at leats one read
-if [ $(samtools view -c ${bam_file_path[i]}) -gt 0 ]; then
+#if BAM is empty
+if [ $(samtools view -c ${bam_file_path[i]}) -eq 0 ]; then
+	# skip and write to stdout
+	echo "empty BAM. skipping...."
+# if not empty perform variant calling
+else
 	# generate an mpileup from bam file then pipe to Varscan mpileupcns function
 	samtools mpileup -f $genome_file -B -d 500000 -q 1 ${bam_file_path[i]}| \
 	$java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > ${bam_file_prefix[i]}.varscan.vcf
