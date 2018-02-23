@@ -29,8 +29,8 @@
     },
     {
       "name": "ref_genome",
-      "label": "referance genome",
-      "help": "referance genome",
+      "label": "reference genome",
+      "help": "reference genome",
       "class": "file",
       "optional": false
     },
@@ -127,7 +127,8 @@
       "name": "varscan_vcf_bed",
       "label": "Output bedfiltered annotated VCF",
       "help": "Output bedfiltered annotated VCF.",
-      "class": "array:file"
+      "class": "array:file",
+      "optional": true
     }
 
   ],
