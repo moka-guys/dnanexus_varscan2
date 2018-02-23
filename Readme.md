@@ -21,7 +21,7 @@ This app requires the following data:
 
 - Compressed reference genome including `*.fa` and `*.fa.fai` (`*.tar.gz`)
 - BAM file(s) (`*.bam`)
-- BED file of regions of intrest, for filtering output vcf (`*.bed`) (optional)
+- BED file of regions of interest, for filtering output vcf (`*.bed`) (optional)
 
 This app requires the following inputs [default]:
 -	min-coverage:	Minimum read depth at a position to make a call [10]
@@ -38,12 +38,12 @@ This app requires the following inputs [default]:
 ## What does this app output?
 This app will output a vcf file for each sample detailing CNV or SNV variants called. Output vcfs will be passed to Ingenuity for annotation and filtering.
 For detailed information about the analysis, consult the Varscan manual (http://varscan.sourceforge.net/using-varscan.html)
-VCF files are output to the folder `vcf`
+VCF files are output to the folder `/vcf`
 
 ## How does this app work?
 - The app loops through the list of input BAM files
-- It checks if the BAM file is empty using `Samtools view -c` - if it is the BAM file is skipped. 
-- If there are aligned reads `Samtools mpileup` creates an mpileup file.
+- It checks if the BAM file is empty using `samtools view -c` - if it is the BAM file is skipped. 
+- If there are aligned reads `samtools mpileup` creates an mpileup file.
 - Variant calling is performed on the mpileup file using `varscan mpileup2cns`.
 - If a BED file is supplied `bedtools intersect` is used to filter the vcf (removing variants from off-target alignment)
 
