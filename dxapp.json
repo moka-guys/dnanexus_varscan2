@@ -1,6 +1,6 @@
 {
   "name": "varscan2_v1.3",
-  "title": "Varscan2",
+  "title": "Varscan2_v1.3",
   "summary": "v1.3 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
