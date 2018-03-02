@@ -1,13 +1,13 @@
 {
-  "name": "varscan2",
-  "title": "Varscan2",
-  "summary": "v1.2 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
+  "name": "varscan2_v1.3",
+  "title": "Varscan2_v1.3",
+  "summary": "v1.3 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
   ],
   "properties": {
-    "github release": "v1.2"
+    "github release": "v1.3"
   },
   "dxapi": "1.0.0",
   "inputSpec": [
@@ -29,8 +29,8 @@
     },
     {
       "name": "ref_genome",
-      "label": "referance genome",
-      "help": "referance genome",
+      "label": "reference genome",
+      "help": "reference genome",
       "class": "file",
       "optional": false
     },
@@ -127,7 +127,8 @@
       "name": "varscan_vcf_bed",
       "label": "Output bedfiltered annotated VCF",
       "help": "Output bedfiltered annotated VCF.",
-      "class": "array:file"
+      "class": "array:file",
+      "optional": true
     }
 
   ],
@@ -142,6 +143,8 @@
         "instanceType": "mem1_ssd1_x8"
       }
     },
+    "distribution" : "Ubuntu",
+    "release" : "14.04",
     "file": "src/code.sh",
     "interpreter": "bash"
   }
