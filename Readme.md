@@ -1,4 +1,4 @@
-# DNAnexus Varscan2.4.3 v1.3
+# DNAnexus Varscan2.4.3 v1.4
 
 ## What does this app do?
 This app applies Varscan2, a variant caller well suited for somatic samples.

@@ -8,8 +8,7 @@ set -e -x -o pipefail
 dx-download-all-inputs --except ref_genome --parallel
 
 # make output folders
-mkdir -p ~/out/varscan_vcf/vcf
-mkdir -p ~/out/varscan_vcf_bed/vcf
+mkdir -p ~/out/varscan_vcf/output/vcf ~/out/varscan_vcf_bed/output/vcf
 
 echo $min_coverage
 echo $min_reads2
@@ -91,15 +90,15 @@ else
 	# generate an mpileup from bam file then pipe to Varscan mpileupcns function
 	# write vcf direct to output folder
 	samtools mpileup -f $genome_file -B -d 500000 -q 1 ${bam_file_path[i]}| \
-	$java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > ~/out/varscan_vcf/vcf/${bam_file_prefix[i]}.varscan.vcf
+	$java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > ~/out/varscan_vcf/output/vcf/${bam_file_prefix[i]}.varscan.vcf
 	# Rename sample in vcf to corrospond to bam file name (aka sample name). Varscan defult is to name samples 'Sample1'
-	sed -i 's/Sample1/'"${bam_file_prefix[i]}"'/' ~/out/varscan_vcf/vcf/${bam_file_prefix[i]}.varscan.vcf
+	sed -i 's/Sample1/'"${bam_file_prefix[i]}"'/' ~/out/varscan_vcf/output/vcf/${bam_file_prefix[i]}.varscan.vcf
 
 	# filter vcf to disply variants located within genomic regions specified by the bed file input.
 	# output vcf direct to the output folder
 	if [ "$bed_file" != "" ]; then
-		 sed 's/chr//' ~/out/varscan_vcf/vcf/${bam_file_prefix[i]}.varscan.vcf > ${bam_file_prefix[i]}.temp.vcf
-	 	/usr/bin/bedtools2/bin/bedtools intersect -header -a ${bam_file_prefix[i]}.temp.vcf -b ${bed_file_path} > ~/out/varscan_vcf_bed/vcf/${bam_file_prefix[i]}.varscan.bedfiltered.vcf	 	
+		 sed 's/chr//' ~/out/varscan_vcf/output/vcf/${bam_file_prefix[i]}.varscan.vcf > ${bam_file_prefix[i]}.temp.vcf
+	 	/usr/bin/bedtools2/bin/bedtools intersect -header -a ${bam_file_prefix[i]}.temp.vcf -b ${bed_file_path} > ~/out/varscan_vcf_bed/output/vcf/${bam_file_prefix[i]}.varscan.bedfiltered.vcf	 	
 	fi
 fi
 done 
