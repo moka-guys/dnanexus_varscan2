@@ -39,4 +39,4 @@ This app will output a vcf file for each sample detailing CNV or SNV variants ca
 
 For detailed information about the analysis, consult the [Varscan manual](https://dkoboldt.github.io/varscan/using-varscan.html)
 
-VCF files are output to the folder `/vcf`
+VCF files are output to the folder `/output`
