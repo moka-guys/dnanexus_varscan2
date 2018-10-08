@@ -11,21 +11,20 @@ The output vcf(s) can be uploaded into Ingenuity for variant interpretation.
 
 ## What inputs are required for this app to run?
 This app requires the following data:
-
 - Compressed reference genome including `*.fa` and `*.fa.fai` (`*.tar.gz`)
 - BAM file(s) (`*.bam`). If multiple BAM files are given a seperate analysis will be performed on each BAM file.
 - BED file of regions of interest, for filtering output vcf (`*.bed`) (optional)
 
 This app requires the following inputs for mpileupcns [app default]:
--	min-coverage:	Minimum read depth at a position to make a call [10]
--	min-reads2:	Minimum supporting reads at a position to call variants [5]
--	min-avg-qual:	Minimum base quality at a position to count a read [15]
--	min-var-freq:	Minimum variant allele frequency threshold [0.01]
--	min-freq-for-hom:	Minimum frequency to call homozygote [0.75]
+-	min-coverage: Minimum read depth at a position to make a call [10]
+-	min-reads2: Minimum supporting reads at a position to call variants [5]
+-	min-avg-qual: Minimum base quality at a position to count a read [15]
+-	min-var-freq: Minimum variant allele frequency threshold [0.01]
+-	min-freq-for-hom: Minimum frequency to call homozygote [0.75]
 -	p-value	Default: p-value threshold for calling variants [0.05]
--	strand-filter:	Ignore variants with >90% support on one strand [False (0)]
--	output-vcf:	Outputs in VCF format [True (1)]
--	variants:	Report only variant (SNP/indel) positions [True (1)]
+-	strand-filter: Ignore variants with >90% support on one strand [False (0)]
+-	output-vcf: Outputs in VCF format [True (1)]
+-	variants: Report only variant (SNP/indel) positions [True (1)]
 
 ## How does this app work?
 - The app loops through the list of input BAM files
@@ -37,5 +36,7 @@ This app requires the following inputs for mpileupcns [app default]:
 
 ## What does this app output?
 This app will output a vcf file for each sample detailing CNV or SNV variants called.
+
 For detailed information about the analysis, consult the [Varscan manual](https://dkoboldt.github.io/varscan/using-varscan.html)
+
 VCF files are output to the folder `/vcf`
