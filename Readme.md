@@ -13,7 +13,7 @@ The output vcf(s) can be uploaded into Ingenuity for variant interpretation.
 This app requires the following data:
 - Compressed reference genome including `*.fa` and `*.fa.fai` (`*.tar.gz`)
 - BAM file(s) (`*.bam`). If multiple BAM files are given a seperate analysis will be performed on each BAM file.
-- BED file of regions of interest, for filtering output vcf (`*.bed`) (optional)
+- BED file of regions of interest, for filtering output vcf (`*.bed`) (optional) - NB if provided, ensure there are no overlapping regions, as any variants found within multiple regions will be called multiple times.
 
 This app requires the following inputs for mpileupcns [app default]:
 -	min-coverage: Minimum read depth at a position to make a call [10]
