@@ -1,13 +1,13 @@
 {
-  "name": "varscan2_v1.4",
-  "title": "Varscan2_v1.4",
-  "summary": "v1.4 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
+  "name": "varscan2_v1.5",
+  "title": "Varscan2_v1.5",
+  "summary": "v1.5 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
   ],
   "properties": {
-    "github release": "v1.4"
+    "github release": "v1.5"
   },
   "dxapi": "1.0.0",
   "inputSpec": [
@@ -94,7 +94,7 @@
      "help": "Ignore variants with >90% support on one strand",
      "class": "boolean",
      "optional": false,
-     "default": false,      
+     "default": true,      
      "group": "Common"
     },
     {
@@ -121,6 +121,13 @@
       "name": "varscan_vcf",
       "label": "Output annotated VCF",
       "help": "Output annotated VCF.",
+      "class": "array:file",
+      "optional": true
+    },
+    {
+      "name": "flagstat",
+      "label": "samtools flagstat output",
+      "help": "samtools flagstat output which should indicate why the mpileup file may be empty.",
       "class": "array:file"
     },
     {
