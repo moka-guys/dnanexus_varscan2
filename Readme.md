@@ -1,4 +1,4 @@
-# DNAnexus Varscan2 v1.4
+# DNAnexus Varscan2 v1.5
 ## What does this app do?
 This app applies Varscan2 ([v2.4.3](https://dkoboldt.github.io/varscan/)), a variant caller well suited for somatic samples.
 
@@ -22,7 +22,7 @@ This app requires the following inputs for mpileupcns [app default]:
 -	min-var-freq: Minimum variant allele frequency threshold [0.01]
 -	min-freq-for-hom: Minimum frequency to call homozygote [0.75]
 -	p-value	Default: p-value threshold for calling variants [0.05]
--	strand-filter: Ignore variants with >90% support on one strand [False (0)]
+-	strand-filter: Ignore variants with >90% support on one strand [True (1)]
 -	output-vcf: Outputs in VCF format [True (1)]
 -	variants: Report only variant (SNP/indel) positions [True (1)]
 
@@ -37,6 +37,9 @@ This app requires the following inputs for mpileupcns [app default]:
 ## What does this app output?
 This app will output a vcf file for each sample detailing CNV or SNV variants called.
 
-For detailed information about the analysis, consult the [Varscan manual](https://dkoboldt.github.io/varscan/using-varscan.html)
+It will also produce a samtools flagstat file, which summarises the bitwise flags present in the BAM file. This can be used to explain an empty mpileup file which does not get processed by Varscan.
 
-VCF files are output to the folder `/output`
+For detailed information about the analysis, consult the [Varscan manual](https://dkoboldt.github.io/varscan/using-varscan.html) and [Samtools flagstat](http://www.htslib.org/doc/samtools.html).
+
+VCF files are output to the folder `/output` and flagstat to the folder `/QC`.
+
