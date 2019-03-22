@@ -28,7 +28,7 @@ This app requires the following inputs for mpileupcns [app default]:
 
 ## How does this app work?
 - The app loops through the list of input BAM files
-- It checks if the BAM file is empty using `samtools view -c` - if it is the BAM file is skipped (samtools v0.1.19-44428cd)
+- It checks if the BAM file is empty using `samtools view -c` - if it is the BAM file is skipped (samtools v1.9)
 - If there are aligned reads `samtools mpileup` creates an mpileup file.
 - Variant calling is performed on the mpileup file using `varscan mpileup2cns` (Varscan2 v2.4.3)
 - If a BED file is supplied `bedtools intersect` is used to filter the vcf (removing variants from off-target alignment) (bedtools v2.25.0)
