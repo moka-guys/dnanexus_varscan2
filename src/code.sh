@@ -9,16 +9,16 @@ dx-download-all-inputs --except ref_genome --parallel
 
 # make output folders
 mkdir -p ~/out/varscan_vcf/output ~/out/varscan_vcf_bed/output ~/out/flagstat/QC/
-
-echo $min_coverage
-echo $min_reads2
-echo $min_avg_qual
-echo $min_var_freq
-echo $min_freq_for_hom
-echo $p_value
-echo $strand_filter
-echo $output_vcf
-echo $variants
+echo "echo arguments:"
+echo "min_coverage" $min_coverage
+echo "min_reads2" $min_reads2
+echo "min_avg_qual" $min_avg_qual
+echo "min_var_freq" $min_var_freq
+echo "min_freq_for_hom" $min_freq_for_hom
+echo "p_value" $p_value
+echo "strand_filter" $strand_filter
+echo "output_vcf" $output_vcf
+echo "variants" $variants
 
 # compile user specified options/inputs required to run Varscan. Append optional inputs, if specified.
 opts=" --min-coverage $min_coverage --min-reads2 $min_reads2"
