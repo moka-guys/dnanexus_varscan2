@@ -37,7 +37,7 @@ This app requires the following inputs for mpileupcns [app default]:
 ## What does this app output?
 This app will output a vcf file for each sample detailing CNV or SNV variants called.
 
-It will also produce a samtools flagstat file, which summarises the bitwise flags present in the BAM file. This can be used to explain an empty mpileup file which does not get processed by Varscan.
+It will also produce a samtools flagstat file, which summarises the bitwise flags present in the BAM file. This can be used to explain an empty mpileup file which does not get processed by Varscan. This output can be displayed by MultiQC.
 
 For detailed information about the analysis, consult the [Varscan manual](https://dkoboldt.github.io/varscan/using-varscan.html) and [Samtools flagstat](http://www.htslib.org/doc/samtools.html).
 

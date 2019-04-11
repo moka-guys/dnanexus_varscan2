@@ -81,16 +81,19 @@ mark-section "Run Varscan VariantAnnotator"
 for (( i=0; i<${#bam_file_path[@]}; i++ )); 
 # show name of current bam file be run
 do echo ${bam_file_prefix[i]}
-#if BAM is empty
+# generate a flagstat output 
+samtools flagstat  ${bam_file_path[i]} > ~/out/flagstat/QC/${bam_file_prefix[i]}.flagstat
+
+#check if BAM is empty
 if [ $(samtools view -c ${bam_file_path[i]}) -eq 0 ]; then
 	# skip and write to stdout
 	echo "empty BAM. skipping...."
+
 # if not empty perform variant calling
 else
 	# generate an mpileup from bam file
 	samtools mpileup -f $genome_file -B -d 500000 -q 1 ${bam_file_path[i]} > ${bam_file_prefix[i]}.mpileup
-	# generate a flagstat output 
-	samtools flagstat  ${bam_file_path[i]} > ~/out/flagstat/QC/${bam_file_prefix[i]}.flagstat
+	
 	# test if the mpileup file is empty - if it is skip varscan variant calling
 	if [ $(cat ${bam_file_prefix[i]}.mpileup | wc -l ) -eq 0 ]; then
 		# skip and write to stdout
