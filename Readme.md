@@ -15,6 +15,10 @@ This app requires the following data:
 - BAM file(s) (`*.bam`). If multiple BAM files are given a seperate analysis will be performed on each BAM file.
 - BED file of regions of interest, for filtering output vcf (`*.bed`) (optional) - NB if provided, ensure there are no overlapping regions, as any variants found within multiple regions will be called multiple times.
 
+This app requires the following inputs for samtools mpileup [app default]:
+-	min-MQ: Minimum mapping quality for an alignment to be used (-q) [1]
+-	min-BQ: Minimum base quality for a base to be considered (-Q) [13]
+
 This app requires the following inputs for mpileupcns [app default]:
 -	min-coverage: Minimum read depth at a position to make a call [10]
 -	min-reads2: Minimum supporting reads at a position to call variants [5]
@@ -28,7 +32,8 @@ This app requires the following inputs for mpileupcns [app default]:
 
 ## How does this app work?
 - The app loops through the list of input BAM files
-- It checks if the BAM file is empty using `samtools view -c` - if it is the BAM file is skipped (samtools v1.9)
+- It creates a flagstat file using `samtools flagstat` (samtools v1.9)
+- It checks if the BAM file is empty using `samtools view -c` - if it is the BAM file is skipped 
 - If there are aligned reads `samtools mpileup` creates an mpileup file.
 - Variant calling is performed on the mpileup file using `varscan mpileup2cns` (Varscan2 v2.4.3)
 - If a BED file is supplied `bedtools intersect` is used to filter the vcf (removing variants from off-target alignment) (bedtools v2.25.0)

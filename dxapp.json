@@ -32,7 +32,20 @@
       "label": "reference genome",
       "help": "reference genome",
       "class": "file",
-      "optional": false
+      "optional": false,
+      "suggestions": [
+        {
+          "name": "hs37d5.fasta-index.tar.gz",
+          "value": 
+            {
+              "$dnanexus_link": 
+              {
+                "project": "project-ByfFPz00jy1fk6PjpZ95F27J",
+                "id": "file-ByYgX700b80gf4ZY1GxvF3Jv"
+              }
+            }
+        }
+      ]
     },
     {
      "name": "min_coverage",
@@ -41,7 +54,7 @@
      "class": "string",
      "optional": false,
      "default": "10",      
-     "group": "Common"
+     "group": "varscan"
     },   
     {
      "name": "min_reads2",
@@ -50,7 +63,7 @@
      "class": "string",
      "optional": false,
      "default": "5",      
-     "group": "Common"
+     "group": "varscan"
     },   
     {
      "name": "min_avg_qual",
@@ -59,7 +72,7 @@
      "class": "string",
      "optional": true,
      "default": "15",      
-     "group": "Common"
+     "group": "varscan"
     },    
     {
      "name": "min_var_freq",
@@ -68,7 +81,7 @@
      "class": "string",
      "optional": true,
      "default": "0.01",      
-     "group": "Common"
+     "group": "varscan"
     },    
     {
      "name": "min_freq_for_hom",
@@ -77,8 +90,8 @@
      "class": "string",
      "optional": true,
      "default": "0.75",      
-     "group": "Common"
-    },    
+     "group": "varscan"
+    },
     {
      "name": "p_value",
      "label": "Default p-value",
@@ -86,7 +99,7 @@
      "class": "string",
      "optional": true,
      "default": "0.05",      
-     "group": "Common"
+     "group": "varscan"
     },
     {
      "name": "strand_filter",
@@ -95,7 +108,7 @@
      "class": "boolean",
      "optional": false,
      "default": true,      
-     "group": "Common"
+     "group": "varscan"
     },
     {
      "name": "output_vcf",
@@ -104,7 +117,7 @@
      "class": "boolean",
      "optional": false,
      "default": true,      
-     "group": "Common"
+     "group": "varscan"
     },
     {
      "name": "variants",
@@ -113,8 +126,26 @@
      "class": "boolean",
      "optional": false,
      "default": true,      
-     "group": "Common"
-    }
+     "group": "varscan"
+    },
+    {
+      "name": "min_MQ",
+      "label": "samtools_mpileup_min_map_qual",
+      "help": "Minimum mapping quality for an alignment to be used in mpileup (-q)",
+      "class": "string",
+      "optional": false,
+      "default": "1",      
+      "group": "samtools_Mpileup"
+     },
+     {
+      "name": "min_BQ",
+      "label": "samtools_mpileup_min_base_qual",
+      "help": "Minimum base quality for an base to be considered in mpileup (-Q)",
+      "class": "string",
+      "optional": false,
+      "default": "13",      
+      "group": "samtools_Mpileup"
+     }
     ],
   "outputSpec": [
     {
@@ -128,8 +159,7 @@
       "name": "flagstat",
       "label": "samtools flagstat output",
       "help": "samtools flagstat output which should indicate why the mpileup file may be empty.",
-      "class": "array:file",
-      "optional": true
+      "class": "array:file"
     },
     {
       "name": "varscan_vcf_bed",
