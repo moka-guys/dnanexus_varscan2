@@ -10,16 +10,6 @@ dx-download-all-inputs --except ref_genome --parallel
 # make output folders
 mkdir -p ~/out/varscan_vcf/output ~/out/varscan_vcf_bed/output ~/out/flagstat/QC/
 
-echo $min_coverage
-echo $min_reads2
-echo $min_avg_qual
-echo $min_var_freq
-echo $min_freq_for_hom
-echo $p_value
-echo $strand_filter
-echo $output_vcf
-echo $variants
-
 # compile user specified options/inputs required to run Varscan. Append optional inputs, if specified.
 opts=" --min-coverage $min_coverage --min-reads2 $min_reads2"
 
@@ -79,18 +69,21 @@ java="java -Xmx$(<.mem_in_mb.txt)m"
 mark-section "Run Varscan VariantAnnotator"
 # loop through array of all bam files input, run varscan for each bam file. 
 for (( i=0; i<${#bam_file_path[@]}; i++ )); 
-# show name of current bam file be run
+# show name of current bam file
 do echo ${bam_file_prefix[i]}
-#if BAM is empty
+# generate a flagstat output 
+samtools flagstat  ${bam_file_path[i]} > ~/out/flagstat/QC/${bam_file_prefix[i]}.flagstat
+
+#check if BAM is empty
 if [ $(samtools view -c ${bam_file_path[i]}) -eq 0 ]; then
 	# skip and write to stdout
 	echo "empty BAM. skipping...."
+
 # if not empty perform variant calling
 else
 	# generate an mpileup from bam file
-	samtools mpileup -f $genome_file -B -d 500000 -q 1 ${bam_file_path[i]} > ${bam_file_prefix[i]}.mpileup
-	# generate a flagstat output 
-	samtools flagstat  ${bam_file_path[i]} > ~/out/flagstat/QC/${bam_file_prefix[i]}.flagstat
+	samtools mpileup -f $genome_file -B -d 500000 -q $min_MQ -q $min_BQ ${bam_file_path[i]} > ${bam_file_prefix[i]}.mpileup
+	
 	# test if the mpileup file is empty - if it is skip varscan variant calling
 	if [ $(cat ${bam_file_prefix[i]}.mpileup | wc -l ) -eq 0 ]; then
 		# skip and write to stdout
