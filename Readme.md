@@ -15,9 +15,10 @@ This app requires the following data:
 - BAM file(s) (`*.bam`). If multiple BAM files are given a seperate analysis will be performed on each BAM file.
 - BED file of regions of interest, for filtering output vcf (`*.bed`) (optional) - NB if provided, ensure there are no overlapping regions, as any variants found within multiple regions will be called multiple times.
 
-This app requires the following inputs for samtools mpileup [app default]:
+The following samtools mpileup can be specified. if not given the app defaults are applied (stated in square brackets):
 -	min-MQ: Minimum mapping quality for an alignment to be used (-q) [1]
 -	min-BQ: Minimum base quality for a base to be considered (-Q) [13]
+-   extra arguments (string)
 
 This app requires the following inputs for mpileupcns [app default]:
 -	min-coverage: Minimum read depth at a position to make a call [10]
