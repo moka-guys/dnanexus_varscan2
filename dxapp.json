@@ -133,18 +133,24 @@
       "label": "samtools_mpileup_min_map_qual",
       "help": "Minimum mapping quality for an alignment to be used in mpileup (-q)",
       "class": "string",
-      "optional": false,
-      "default": "1",      
-      "group": "samtools_Mpileup"
+      "optional": true,    
+      "group": "samtools mpileup"
      },
      {
       "name": "min_BQ",
       "label": "samtools_mpileup_min_base_qual",
       "help": "Minimum base quality for an base to be considered in mpileup (-Q)",
       "class": "string",
-      "optional": false,
-      "default": "13",      
-      "group": "samtools_Mpileup"
+      "optional": true,      
+      "group": "samtools mpileup"
+     },
+     {
+      "name": "mpileup_extra_opts",
+      "label": "samtools_mpileup_extra_opts",
+      "help": "any extra options",
+      "class": "string",
+      "optional": true,      
+      "group": "samtools mpileup"
      }
     ],
   "outputSpec": [

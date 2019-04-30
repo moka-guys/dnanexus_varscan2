@@ -81,8 +81,19 @@ if [ $(samtools view -c ${bam_file_path[i]}) -eq 0 ]; then
 
 # if not empty perform variant calling
 else
+	# build the argument string, including the optional inputs if required 
+	mpileup_opts="-B -d 500000"
+	if [ "$min_MQ" != "" ]; then
+	mpileup_opts="$mpileup_opts -q $min_MQ"
+	fi
+	if [ "$min_BQ" != "" ]; then
+	mpileup_opts="$mpileup_opts -Q $min_BQ"
+	fi
+	if [ "$mpileup_extra_opts" != "" ]; then
+	mpileup_opts="$mpileup_opts $mpileup_extra_opts"
+	fi
 	# generate an mpileup from bam file
-	samtools mpileup -f $genome_file -B -d 500000 -q $min_MQ -q $min_BQ ${bam_file_path[i]} > ${bam_file_prefix[i]}.mpileup
+	samtools mpileup -f $genome_file $mpileup_opts ${bam_file_path[i]} > ${bam_file_prefix[i]}.mpileup
 	
 	# test if the mpileup file is empty - if it is skip varscan variant calling
 	if [ $(cat ${bam_file_prefix[i]}.mpileup | wc -l ) -eq 0 ]; then
