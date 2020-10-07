@@ -8,13 +8,13 @@ set -e -x -o pipefail
 dx-download-all-inputs --except ref_genome --parallel
 
 # make output folders
-mkdir -p ~/out/varscan_vcf/output ~/out/varscan_vcf_bed/output ~/out/flagstat/QC/
+mkdir -p ~/out/varscan_vcf/output ~/out/varscan_vcf_bed/output ~/out/flagstat/QC/ ~/out/mpileup_file/coverage/mpileup/
 
 # compile user specified options/inputs required to run Varscan. Append optional inputs, if specified.
 opts=" --min-coverage $min_coverage --min-reads2 $min_reads2"
 
-if [ "$min_avg_qual" != "" ]; then
-  opts="$opts --min_avg_qual $min_avg_qual"
+if [ "$min_BQ" != "" ]; then
+  opts="$opts --min_avg_qual $min_BQ"
 fi
 
 if [ "$min_var_freq" != "" ]; then
@@ -82,26 +82,32 @@ if [ $(samtools view -c ${bam_file_path[i]}) -eq 0 ]; then
 # if not empty perform variant calling
 else
 	# build the argument string, including the optional inputs if required 
-	mpileup_opts="-B -d 500000"
+	# -a outputs all abses, even is 0 coverage
+	# -B disables BAQ
+	# -d max number of reads to count (saves memory - set very high to override default)
+	mpileup_opts="-a -B -d 500000"
 	if [ "$min_MQ" != "" ]; then
 	mpileup_opts="$mpileup_opts -q $min_MQ"
 	fi
 	if [ "$min_BQ" != "" ]; then
 	mpileup_opts="$mpileup_opts -Q $min_BQ"
 	fi
+	if [ "$bed_file" != "" ]; then
+	mpileup_opts="$mpileup_opts -l $bed_file_path"
+	fi
 	if [ "$mpileup_extra_opts" != "" ]; then
 	mpileup_opts="$mpileup_opts $mpileup_extra_opts"
 	fi
 	# generate an mpileup from bam file
-	samtools mpileup -f $genome_file $mpileup_opts ${bam_file_path[i]} > ${bam_file_prefix[i]}.mpileup
+	samtools mpileup -f $genome_file $mpileup_opts ${bam_file_path[i]} > out/mpileup_file/coverage/mpileup/${bam_file_prefix[i]}.mpileup
 	
 	# test if the mpileup file is empty - if it is skip varscan variant calling
-	if [ $(cat ${bam_file_prefix[i]}.mpileup | wc -l ) -eq 0 ]; then
+	if [ $(cat out/mpileup_file/coverage/mpileup/${bam_file_prefix[i]}.mpileup | wc -l ) -eq 0 ]; then
 		# skip and write to stdout
 		echo "empty mpileup file. skipping...."
 	else
 		#Call varscan on mpileup file using mpileupcns function. write vcf direct to output folder
-		cat ${bam_file_prefix[i]}.mpileup | $java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
+		cat out/mpileup_file/coverage/mpileup/${bam_file_prefix[i]}.mpileup | $java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
 		# Rename sample in vcf to corrospond to bam file name (aka sample name). Varscan defult is to name samples 'Sample1'
 		sed -i 's/Sample1/'"${bam_file_prefix[i]}"'/' ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
 		# if bedfile provided filter vcf to contain only variants within genomic regions specified by the bed file.
