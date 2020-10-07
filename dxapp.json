@@ -1,13 +1,13 @@
 {
-  "name": "varscan2_v1.6",
-  "title": "Varscan2_v1.6",
-  "summary": "v1.6 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
+  "name": "varscan2_v1.7",
+  "title": "Varscan2_v1.7",
+  "summary": "v1.7 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
   ],
   "properties": {
-    "github release": "v1.6"
+    "github release": "v1.7"
   },
   "dxapi": "1.0.0",
   "inputSpec": [
@@ -64,16 +64,7 @@
      "optional": false,
      "default": "5",      
      "group": "varscan"
-    },   
-    {
-     "name": "min_avg_qual",
-     "label": "min-avg-qual",
-     "help": "Minimum base quality at a position to count a read",
-     "class": "string",
-     "optional": true,
-     "default": "15",      
-     "group": "varscan"
-    },    
+    },
     {
      "name": "min_var_freq",
      "label": "min-var-freq",
@@ -134,17 +125,17 @@
       "help": "Minimum mapping quality for an alignment to be used in mpileup (-q)",
       "class": "string",
       "optional": true, 
-      "default": "1",   
+      "default": "20",
       "group": "samtools mpileup"
      },
      {
       "name": "min_BQ",
-      "label": "samtools_mpileup_min_base_qual",
-      "help": "Minimum base quality for an base to be considered in mpileup (-Q)",
+      "label": "Minimum base quality for mpileup and varscan",
+      "help": "Minimum base quality for an base to be considered (mpileup -Q and varscan --min_avg_qual)",
       "class": "string",
       "optional": true,      
-      "default": "13",
-      "group": "samtools mpileup"
+      "default": "15",
+      "group": "Common"
      },
      {
       "name": "mpileup_extra_opts",
@@ -175,8 +166,13 @@
       "help": "Output bedfiltered annotated VCF.",
       "class": "array:file",
       "optional": true
+    },
+    {
+      "name": "mpileup_file",
+      "label": "mpileup file",
+      "help": "Output Samtools mpileup file used by varscan.",
+      "class": "array:file"
     }
-
   ],
   "runSpec": {
     "execDepends": [
