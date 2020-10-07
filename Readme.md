@@ -26,7 +26,7 @@ This app requires the following inputs for mpileupcns [app default]:
 -	variants: Report only variant (SNP/indel) positions [True (1)]
 
 The following samtools mpileup can be specified. if not given the app defaults are applied (stated in square brackets):
--	min-MQ: Minimum mapping quality for an alignment to be used (-q) [1]
+-	min-MQ: Minimum mapping quality for an alignment to be used (-q) [20]
 -   extra arguments (string)
 
 Minimum base call quality
