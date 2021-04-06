@@ -1,4 +1,4 @@
-# DNAnexus Varscan2.4.3 v1.3
+# DNAnexus Varscan2.4.3 v1.3.1
 
 ## What does this app do?
 This app applies Varscan2, a variant caller well suited for somatic samples.
@@ -50,3 +50,4 @@ VCF files are output to the folder `/vcf`
 
 ## Custom modifications
 If a bed file is provided, the varscan output (`*.vcf`) are filtered to regions of interest denoted in the bed file. 
+in v1.3.1 the reference build is stated in the VCF header

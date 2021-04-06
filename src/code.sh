@@ -94,6 +94,8 @@ else
 	$java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > ~/out/varscan_vcf/vcf/${bam_file_prefix[i]}.varscan.vcf
 	# Rename sample in vcf to corrospond to bam file name (aka sample name). Varscan defult is to name samples 'Sample1'
 	sed -i 's/Sample1/'"${bam_file_prefix[i]}"'/' ~/out/varscan_vcf/vcf/${bam_file_prefix[i]}.varscan.vcf
+	# add the reference genome into the last line of the header
+	sed -i "s/#CHROM/##REFERENCE=hg19\n#CHROM/" ~/out/varscan_vcf/vcf/${bam_file_prefix[i]}.varscan.vcf
 
 	# filter vcf to disply variants located within genomic regions specified by the bed file input.
 	# output vcf direct to the output folder
