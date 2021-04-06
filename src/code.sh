@@ -50,10 +50,29 @@ mkdir genome
 dx cat "$ref_genome" | tar zxvf - -C genome  
 # => genome/<ref>, genome/<ref>.ann, genome/<ref>.bwt, etc.
 
-# rename genome files to grch37 so that the VCF header states the reference to be grch37.fa, which then allows Ingenuity to accept the VCFs (otherwise VCF header would have reference as genome.fa which Ingenuity won't accept)
-mv  genome/*.fa  genome/grch37.fa
-mv  genome/*.fa.fai  genome/grch37.fa.fai
-# mv genome.dict grch37.dict
+# Parse the reference genome file name for the genome build used and set $genomebuild appropriately.
+# This reference build will be added to the VCF header.
+genomebuild="unknown"
+if [[ $ref_genome_name =~ .*37.* ]]
+then
+	genomebuild="grch37"
+elif [[ $ref_genome_name =~ .*19.* ]]
+then
+	genomebuild="hg19"
+elif [[ $ref_genome_name =~ .*38.* ]]
+then
+	genomebuild="grch38"
+elif [[ $ref_genome_name =~ .*20.* ]]
+then
+	genomebuild="hg20"
+else
+	echo "$ref_genome_name does not contain a parsable reference genome name"
+fi
+
+# rename reference genoms
+mv genome/*.fa  genome/$genomebuild.fa
+mv genome/*.fa.fai  genome/$genomebuild.fa.fai
+# capture the fasta file as a variable for mpileup
 genome_file=`ls genome/*.fa`
 
 # Show the java version the worker is using
@@ -65,8 +84,7 @@ echo $(java -version)
 head -n1 /proc/meminfo | awk '{print int($2*0.8/1024)}' >.mem_in_mb.txt
 java="java -Xmx$(<.mem_in_mb.txt)m"
 
-# Run variant annotator
-mark-section "Run Varscan VariantAnnotator"
+mark-section "Run Varscan"
 # loop through array of all bam files input, run varscan for each bam file. 
 for (( i=0; i<${#bam_file_path[@]}; i++ )); 
 # show name of current bam file
@@ -110,6 +128,9 @@ else
 		cat out/mpileup_file/coverage/mpileup/${bam_file_prefix[i]}.mpileup | $java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
 		# Rename sample in vcf to corrospond to bam file name (aka sample name). Varscan defult is to name samples 'Sample1'
 		sed -i 's/Sample1/'"${bam_file_prefix[i]}"'/' ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
+		# add the reference genome into the last line of the header
+		sed -i "s/#CHROM/##REFERENCE=$genomebuild\n#CHROM/" ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
+
 		# if bedfile provided filter vcf to contain only variants within genomic regions specified by the bed file.
 		if [ "$bed_file" != "" ]; then
 			# use sed to remove chr from chromosome in bedfile. write to temp vcf (not output from this app)
