@@ -1,4 +1,4 @@
-# DNAnexus Varscan2 v1.7
+# DNAnexus Varscan2 v1.7.1
 ## What does this app do?
 This app applies Varscan2 ([v2.4.3](https://dkoboldt.github.io/varscan/)), a variant caller well suited for somatic samples.
 
@@ -43,7 +43,7 @@ Minimum base call quality
 
 ## What does this app output?
 This app will output:
-- A vcf file for each sample detailing CNV or SNV variants called.
+- A vcf file for each sample detailing CNV or SNV variants called. As of V1.7.1 the reference genome will be stated in the VCF header
 - If a BED file is provided a bed filtered vcf file for each sample, detailing CNV or SNV variants called.
 - samtools mpileup file. This is the input to varscan and can be used to indicate the read depth available to Varscan.
 - samtools flagstat file. Summarises the bitwise flags present in the BAM file. This can be used to explain an empty mpileup file which does not get processed by Varscan. This output can be displayed by MultiQC.
