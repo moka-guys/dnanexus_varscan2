@@ -89,6 +89,10 @@ mark-section "Run Varscan"
 for (( i=0; i<${#bam_file_path[@]}; i++ )); 
 # show name of current bam file
 do echo ${bam_file_prefix[i]}
+# if $samplename is not given set it to the bamfile prefix
+if [ "$samplename" == "" ]; then
+	samplename=${bam_file_prefix[i]}
+fi
 # generate a flagstat output 
 samtools flagstat  ${bam_file_path[i]} > ~/out/flagstat/QC/${bam_file_prefix[i]}.flagstat
 
@@ -126,8 +130,8 @@ else
 	else
 		#Call varscan on mpileup file using mpileupcns function. write vcf direct to output folder
 		cat out/mpileup_file/coverage/mpileup/${bam_file_prefix[i]}.mpileup | $java -jar /usr/bin/VarScan.v2.4.3.jar mpileup2cns $opts > out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
-		# Rename sample in vcf to corrospond to bam file name (aka sample name). Varscan defult is to name samples 'Sample1'
-		sed -i 's/Sample1/'"${bam_file_prefix[i]}"'/' ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
+		# Rename sample in vcf to given samplename. Varscan defult is to name samples 'Sample1'
+		sed -i 's/Sample1/'"$samplename"'/' ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
 		# add the reference genome into the last line of the header
 		sed -i "s/#CHROM/##REFERENCE=$genomebuild\n#CHROM/" ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf
 

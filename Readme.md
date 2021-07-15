@@ -1,4 +1,4 @@
-# DNAnexus Varscan2 v1.7.1
+# DNAnexus Varscan2 v1.7.2
 ## What does this app do?
 This app applies Varscan2 ([v2.4.3](https://dkoboldt.github.io/varscan/)), a variant caller well suited for somatic samples.
 
@@ -24,6 +24,7 @@ This app requires the following inputs for mpileupcns [app default]:
 -	strand-filter: Ignore variants with >90% support on one strand [True (1)]
 -	output-vcf: Outputs in VCF format [True (1)]
 -	variants: Report only variant (SNP/indel) positions [True (1)]
+-	samplename: samplename to be included in the VCF headerline (string). If not provided the bamfile prefix will be used.
 
 The following samtools mpileup can be specified. if not given the app defaults are applied (stated in square brackets):
 -	min-MQ: Minimum mapping quality for an alignment to be used (-q) [20]

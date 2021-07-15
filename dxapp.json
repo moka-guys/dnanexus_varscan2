@@ -1,13 +1,13 @@
 {
-  "name": "varscan2_v1.7.1",
-  "title": "Varscan2_v1.7.1",
-  "summary": "v1.7.1 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
+  "name": "varscan2_v1.7.2",
+  "title": "Varscan2_v1.7.2",
+  "summary": "v1.7.2 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
   ],
   "properties": {
-    "github release": "v1.7.1"
+    "github release": "v1.7.2"
   },
   "dxapi": "1.0.0",
   "inputSpec": [
@@ -137,6 +137,14 @@
       "default": "15",
       "group": "Common"
      },
+	 {
+		"name": "samplename",
+		"label": "samplename",
+		"help": "samplename to state in vcf headerline",
+		"class": "string",
+		"optional": true,
+		"group": "varscan"
+	 },
      {
       "name": "mpileup_extra_opts",
       "label": "samtools_mpileup_extra_opts",
