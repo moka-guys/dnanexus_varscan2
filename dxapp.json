@@ -3,7 +3,7 @@
   "title": "Varscan2_v1.8.0",
   "summary": "v1.8.0 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
-    "Variants",7.2
+    "Variants",
     "Cancer"
   ],
   "properties": {
