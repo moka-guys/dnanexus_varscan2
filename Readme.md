@@ -7,7 +7,7 @@ Varscan2 variant calling is performed after alignment and produces a vcf. If a B
 ## What are typical use cases for this app?
 Varscan2 is used to detect variation (CNV and SNV) in somatic cancer samples being tested using the SWIFT amplicon panels. 
 
-The output vcf(s) can be uploaded into Ingenuity for variant interpretation.
+The output vcf(s) can be uploaded into a relevant decision support tool for variant interpretation.
 
 ## What inputs are required for this app to run?
 This app requires the following data:
