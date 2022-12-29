@@ -140,7 +140,7 @@ else
 			# use sed to remove chr from chromosome in bedfile. write to temp vcf (not output from this app)
 			sed 's/chr//' ~/out/varscan_vcf/output/${bam_file_prefix[i]}.varscan.vcf > ${bam_file_prefix[i]}.temp.vcf
 			# use bedtools to instersect BED file and VCF file. Write VCF direct to the output folder
-			/usr/bin/bedtools2/bin/bedtools intersect -header -a ${bam_file_prefix[i]}.temp.vcf -b ${bed_file_path} > ~/out/varscan_vcf_bed/output/${bam_file_prefix[i]}.varscan.bedfiltered.vcf
+			bedtools intersect -header -a ${bam_file_prefix[i]}.temp.vcf -b ${bed_file_path} > ~/out/varscan_vcf_bed/output/${bam_file_prefix[i]}.varscan.bedfiltered.vcf
 		fi
 	fi
 fi

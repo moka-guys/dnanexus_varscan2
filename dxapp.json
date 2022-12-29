@@ -184,9 +184,9 @@
   ],
   "runSpec": {
     "execDepends": [
-    {
-      "name": "openjdk-8-jre-headless"
-    }
+    {"name": "openjdk-8-jre-headless"},
+    {"name": "bedtools", "version": "2.27.1+dfsg-4ubuntu1"},
+    {"name": "samtools", "version": "1.10-3"}
     ],
     "systemRequirements": {
       "main": {
