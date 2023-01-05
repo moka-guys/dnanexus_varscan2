@@ -1,13 +1,13 @@
 {
-  "name": "varscan2_v1.7.2",
-  "title": "Varscan2_v1.7.2",
-  "summary": "v1.7.2 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
+  "name": "varscan2_v1.8.0",
+  "title": "Varscan2_v1.8.0",
+  "summary": "v1.8.0 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
   ],
   "properties": {
-    "github release": "v1.7.2"
+    "github release": "v1.8.0"
   },
   "dxapi": "1.0.0",
   "inputSpec": [
@@ -184,9 +184,9 @@
   ],
   "runSpec": {
     "execDepends": [
-    {
-      "name": "openjdk-8-jre-headless"
-    }
+    {"name": "openjdk-8-jre-headless"},
+    {"name": "bedtools", "version": "2.27.1+dfsg-4ubuntu1"},
+    {"name": "samtools", "version": "1.10-3"}
     ],
     "systemRequirements": {
       "main": {
@@ -194,7 +194,8 @@
       }
     },
     "distribution" : "Ubuntu",
-    "release" : "14.04",
+    "release" : "20.04",
+    "version" : "0",
     "file": "src/code.sh",
     "interpreter": "bash"
   }

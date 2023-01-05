@@ -1,4 +1,4 @@
-# DNAnexus Varscan2 v1.7.2
+# DNAnexus Varscan2 v1.8.0
 ## What does this app do?
 This app applies Varscan2 ([v2.4.3](https://dkoboldt.github.io/varscan/)), a variant caller well suited for somatic samples.
 
@@ -7,7 +7,7 @@ Varscan2 variant calling is performed after alignment and produces a vcf. If a B
 ## What are typical use cases for this app?
 Varscan2 is used to detect variation (CNV and SNV) in somatic cancer samples being tested using the SWIFT amplicon panels. 
 
-The output vcf(s) can be uploaded into Ingenuity for variant interpretation.
+The output vcf(s) can be uploaded into a relevant decision support tool for variant interpretation.
 
 ## What inputs are required for this app to run?
 This app requires the following data:

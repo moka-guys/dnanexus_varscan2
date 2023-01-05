@@ -1,9 +1,0 @@
-.DS_Store
-testingData
-*.pdf
-docs/_build/
-docs/content/images/
-.project
-.cproject
-nbproject
-sandbox
