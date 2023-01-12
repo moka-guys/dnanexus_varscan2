@@ -1,13 +1,13 @@
 {
-  "name": "varscan2_v1.8.0",
-  "title": "Varscan2_v1.8.0",
-  "summary": "v1.8.0 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
+  "name": "varscan2_v1.8.1",
+  "title": "Varscan2_v1.8.1",
+  "summary": "v1.8.1 - (Varscan 2 somatic variant caller for use on SWIFT NGS sequencing output)",
   "tags": [
     "Variants",
     "Cancer"
   ],
   "properties": {
-    "github release": "v1.8.0"
+    "github release": "v1.8.1"
   },
   "dxapi": "1.0.0",
   "inputSpec": [
